@@ -1,0 +1,83 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>(USR002)User Register</title>
+<link rel="stylesheet" type="text/css"
+	th:href="@{/stylesheets/container.css}" />
+<link rel="stylesheet" type="text/css"
+	th:href="@{/stylesheets/base.css}" />
+<script type="text/javascript" src="/js/accordion-menu.js" />
+<script type="text/javascript" src="/js/general.js" />
+<script type="text/javascript">
+	window.onload = function() {
+		menu();
+
+	}
+</script>
+</head>
+<body class="main_body">
+
+	<div id="header" th:insert="header :: header"></div>
+
+	<div id="container">
+		<div id="left_menu" th:insert="menu :: menu">
+			<!-- menu html code exist the menu function of general.js -->
+		</div>
+		<div id="main_contents">
+			<div id="contents">
+				<h3>User Register</h3>
+				<label id="message" th:text="${error}"></label><label id="message"
+					th:text="${success}"></label><br /> <br /> <br />
+
+				<form name="registerForm" action="#" th:action="@{userAdd}"
+					method="post" th:object="${bean}">
+					<table class="tableForm">
+						<tr>
+							<td class="tblSingleLabel">User ID *</td>
+							<td class="tblSingleInput"><input type="text" id="txtUserId"
+								class="txt_popup" th:field="*{id}" /> <span
+								th:if="${#fields.hasErrors('id')}" th:errors="*{id}"></span></td>
+
+						</tr>
+						<tr>
+							<td class="tblSingleLabel">User Name</td>
+							<td class="tblSingleInput"><input type="text"
+								class="txtlong_popup" id="txtUserName" th:field="*{name}" /> <span
+								th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></span></td>
+
+						</tr>
+						<tr>
+							<td class="tblSingleLabel">Password *</td>
+							<td class="tblSingleInput"><input type="password"
+								class="txtlong_popup" id="txtUserName" th:field="*{password}" />
+								<span th:if="${#fields.hasErrors('password')}"
+								th:errors="*{password}"></span></td>
+
+						</tr>
+						<tr>
+							<td class="tblSingleLabel">Confirm Password *</td>
+							<td class="tblSingleInput"><input type="password"
+								class="txtlong_popup" id="txtUserName" th:field="*{conPwd}" />
+								<span th:if="${#fields.hasErrors('conPwd')}"
+								th:errors="*{password}"></span></td>
+
+						</tr>
+
+					</table>
+					<br /> <input type="submit" value="Register" class="button"
+						onclick="javascript:insert()" />
+				</form>
+
+				<br /> <br /> <br />
+			</div>
+		</div>
+
+	</div>
+
+	<div class="footer">
+		<span>Copyright &#169; ACE Inspiration 2016</span>
+	</div>
+</body>
+</html>

@@ -1,0 +1,21 @@
+<html xmlns:th="http://www.thymeleaf.org">
+
+<div th:fragment="menu">
+	<div id="accordion">
+	<ul>
+		<li>
+			<div>Class Management</div>
+			<ul>
+				<li><a th:href="@{/classRegister}">Class Registration</a></li>
+				<li><a th:href="@{/studentSearch}">Student Search</a></li>
+				<li><a th:href="@{/studentRegister}">Student Registration</a></li>
+			</ul>
+		</li>
+		<li id="no-child"><a
+			th:href="@{/userManagement}"
+			style="font-weight: bold;">User Management</a></li>
+	</ul>
+</div>
+</div>
+
+</html>

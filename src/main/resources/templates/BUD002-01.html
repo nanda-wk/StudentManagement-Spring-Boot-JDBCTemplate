@@ -1,0 +1,110 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>(BUD002-01)Student Update</title>
+<link rel="stylesheet" type="text/css"
+	th:href="@{/stylesheets/container.css}" />
+<link rel="stylesheet" type="text/css"
+	th:href="@{/stylesheets/base.css}" />
+<script type="text/javascript" src="/js/accordion-menu.js" />
+<script type="text/javascript" src="/js/general.js" />
+<script type="text/javascript">
+	window.onload = function() {
+		menu();
+	}
+</script>
+</head>
+<body class="main_body">
+
+	<div id="header" th:insert="header :: header"></div>
+
+	<div id="container">
+		<div id="left_menu" th:insert="menu :: menu">
+			<!-- menu html code exist the menu function of general.js -->
+		</div>
+		<form action="#" th:action="studentUpdate" method="post"
+			th:object="${bean}">
+			<div id="main_contents">
+				<div id="contents">
+					<div class="search_form">
+						<h3>Student Update</h3>
+						<label id="errormsg" th:text="${error}"></label> <label
+							id="message" style="color: blue;" th:text="${success}"></label> <br />
+						<br />
+						<table class="tableForm">
+							<tr>
+								<td class="tblSingleLabel">Student No.</td>
+								<td><input type="text" th:field="*{studentId}" class="txt"
+									readonly="readonly" /> <span
+									th:if="${#fields.hasErrors('studentId')}"
+									th:errors="*{studentId}"></span></td>
+							</tr>
+							<tr>
+								<td class="tblSingleLabel">Student Name *</td>
+								<td><input type="text" th:field="*{studentName}"
+									class="txt" /> <span
+									th:if="${#fields.hasErrors('studentName')}"
+									th:errors="*{studentName}"></span></td>
+							</tr>
+							<tr>
+								<td class="tblSingleLabel">Class Name *</td>
+								<td class="tblSingleInput"><select id="expenseType"
+									class="normal_sel" th:field="*{className}">
+										<option th:each="i : ${clist}" th:value="${i}" th:text="${i}"></option>
+								</select><span th:if="${#fields.hasErrors('className')}"
+									th:errors="*{className}"></span></td>
+							</tr>
+							<tr>
+								<td class="tblSingleLabel">Registered Date *</td>
+								<td class="tblSingleInput"><select id="expenseType"
+									class="short_sel" th:field="*{year}">
+										<option th:value="Year">Year</option>
+										<option th:each="i : ${#numbers.sequence(2018, 2022)}"
+											th:text="${i}" th:value="${i}"></option>
+								</select> <select id="expenseType" class="short_sel" th:field="*{month}">
+										<option th:value="Month">Month</option>
+										<option th:each="i : ${#numbers.sequence(1, 9)}"
+											th:text="'0'+${i}" th:value="'0'+${i}"></option>
+										<option th:each="i : ${#numbers.sequence(10, 12)}"
+											th:text="${i}" th:value="${i}"></option>
+								</select> <select id="expenseType" class="short_sel" th:field="*{day}">
+										<option th:value="Day">Day</option>
+										<option th:each="i : ${#numbers.sequence(1, 9)}"
+											th:text="'0'+${i}" th:value="'0'+${i}"></option>
+										<option th:each="i : ${#numbers.sequence(10, 31)}"
+											th:text="${i}" th:value="${i}"></option>
+								</select></td>
+							</tr>
+							<tr>
+								<td class="tblSingleLabel">Status *</td>
+								<td class="tblSingleInput"><select id="expenseType"
+									class="normal_sel" th:field="*{status}">
+										<option value=""></option>
+										<option th:value="Attending">Attending</option>
+										<option th:value="Passed">Passed</option>
+										<option th:value="Failed">Failed</option>
+								</select></td>
+							</tr>
+						</table>
+						<br />
+						<div id="btnGroup">
+							<input type="submit" value="Update" class="button" /> <a
+								th:href="@{/studentDelete(id=*{studentId})}"><input
+								type="button" value="Delete" id="delete" class="button"
+								onclick="javascript:deleteBudget()" /></a> <input type="button"
+								value="Back" class="button"
+								onclick="window.location.replace('/studentSearch')" />
+						</div>
+					</div>
+				</div>
+			</div>
+		</form>
+	</div>
+
+	<div class="footer">
+		<span>Copyright &#169; ACE Inspiration 2016</span>
+	</div>
+</body>
+</html>

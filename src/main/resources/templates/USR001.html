@@ -1,0 +1,93 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>(USR001) User Search</title>
+<link rel="stylesheet" type="text/css"
+	th:href="@{/stylesheets/container.css}" />
+<link rel="stylesheet" type="text/css"
+	th:href="@{/stylesheets/base.css}" />
+<script type="text/javascript" src="/js/accordion-menu.js" />
+<script type="text/javascript" src="/js/general.js" />
+<script type="text/javascript">
+	window.onload = function() {
+		menu();
+	}
+</script>
+</head>
+<body class="main_body">
+
+	<div id="header" th:insert="header :: header"></div>
+
+	<div id="container">
+		<div id="left_menu" th:insert="menu :: menu">
+			<!-- menu html code exist the menu function of general.js -->
+		</div>
+		<div id="main_contents">
+			<div id="contents">
+				<div class="search_form">
+					<h3>User Search</h3>
+					<form action="#" th:action="@{userSearch}" method="get"
+						th:object="${bean}">
+						<table class="tableForm">
+							<tr>
+								<td class="tblLabel"><label>User ID</label></td>
+								<td class="tblInputNormal"><input type="text"
+									id="txtUserId" class="txt" th:field="*{userId}" /></td>
+
+								<td class="tblLabel">User Name</td>
+								<td class="tblInputNormal"><input type="text"
+									id="txtUserName" class="txt" th:field="*{userName}" /></td>
+
+							</tr>
+						</table>
+						<br /> <input type="submit" value="Search" class="button"
+							onclick="searchList()" /> <a
+							href="/userAdd"> <input
+							type="button" value="Add" class="button" id="userInsert" />
+						</a> <input type="button" value="Reset" class="button"
+							onclick="location.href='/userManagement'" />
+					</form>
+					<br /> <br />
+					<div id="errormsg">
+						<label id="message" th:text="${error}"></label><label id="message" th:text="${success}"></label>
+					</div>
+				</div>
+
+				<br /> <br /> <br />
+				<div id="list">
+					<form name="listForm">
+						<table class="resultTable">
+							<tr class="tblHeader" th:if="${ulist!=null}">
+								<th width="1%">Delete</th>
+								<th width="1%">Update</th>
+								<th width="12%">User ID</th>
+								<th width="24%">User Name</th>
+
+							</tr>
+							<tr th:each="ul:${ulist}">
+								<td><a th:href="@{/userDelete(id=${ul.id})}"><input
+										type="button" value="Delete" id="deleteuser" class="button"
+										onclick="javascript:checkDelete()" /></a></td>
+								<td><a
+									th:href="@{/userUpdate(id=${ul.id})}"> <input
+										type="button" value="Update" class="button" id="userUpdate" />
+								</a></td>
+
+								<td th:text="${ul.id}"></td>
+								<td th:text="${ul.name}"></td>
+							</tr>
+						</table>
+					</form>
+				</div>
+
+			</div>
+		</div>
+
+	</div>
+	<div class="footer">
+		<span>Copyright &#169; ACE Inspiration 2016</span>
+	</div>
+</body>
+</html>
